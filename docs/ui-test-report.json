@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0-dev.2",
+  "host": "Linux x86_64",
+  "method": "headless tests of production keyboard/mouse handlers and framebuffer rendering",
+  "rust_tests_passed": 12,
+  "editor_tests_passed": 11,
+  "tests": [
+    "desktop::tests::running_program_locks_document_switch_and_close",
+    "desktop::tests::save_failure_and_other_open_file_do_not_lose_changes",
+    "desktop::tests::file_browser_filter_parent_errors_and_open_keyboard",
+    "desktop::tests::browser_mouse_folder_and_filename_field",
+    "tests::search_wrap",
+    "tests::edit_undo_unicode_selection",
+    "desktop::tests::title_click_focus_drag_resize_and_close",
+    "desktop::tests::save_as_confirmation_cancel_and_close_save",
+    "desktop::tests::tile_cascade_zoom_and_large_document_set",
+    "desktop::tests::window_list_keyboard_and_mouse_select_documents",
+    "desktop::tests::scroll_offsets_survive_render_and_click_maps_scrolled_text",
+    "tests::layouts"
+  ],
+  "native_regression": {
+    "passed": 48,
+    "total": 48
+  },
+  "visual_review": [
+    "editor",
+    "tile",
+    "cascade",
+    "files",
+    "windows",
+    "about"
+  ],
+  "physical_window_manager_tested": false,
+  "windows_macos_native_tested": false
+}

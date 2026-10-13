@@ -1,0 +1,15 @@
+[package]
+name = "otp-ide"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "otp"
+path = "src/main.rs"
+
+[dependencies]
+otp-core = { path = "../otp-core" }
+minifb = { version = "=0.28.0", default-features = false, features = ["x11"] }
+font8x8 = "=0.3.1"
+png = "=0.17.16"

@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: GPL-3.0-only
+
+# Rust / Cargo build output
+/target/
+**/*.rs.bk
+
+# Native build intermediates emitted next to a Pascal source
+examples/*.otp-build-*/
+# Compiled Pascal executables that live next to their source (keep .PAS, drop binary)
+examples/HELLO
+examples/BELAJAR
+examples/FAKTORIAL
+examples/PARAMETER
+examples/ARRAY_RECORD
+examples/FILE_TEKS
+examples/*.exe
+
+# macOS metadata
+.DS_Store
+# Vim / Emacs swap files
+*.swp
+*.swo
+*~
+# JetBrains IDE
+/.idea/
+# VS Code (per-user; keep repo-shared settings if any ever added)
+/.vscode/
+
+# Python caches used by scripts/ and tests/
+__pycache__/
+*.pyc
+
+# Local environment overrides
+.env
+.env.*
+!.env.example

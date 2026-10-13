@@ -1,0 +1,71 @@
+# SPDX-License-Identifier: GPL-3.0-only
+name: native
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: ${{ matrix.label }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            label: linux-x64
+            extra-apt: libx11-dev libxkbcommon-dev libwayland-dev
+          - os: macos-13
+            label: macos-x64
+          - os: macos-14
+            label: macos-arm64
+          - os: windows-2022
+            label: windows-x64
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust 1.85.1
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.85.1
+          components: rustfmt
+
+      - name: Linux X11 headers
+        if: matrix.extra-apt != ''
+        run: sudo apt-get update && sudo apt-get install -y ${{ matrix.extra-apt }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: cargo build (release, offline, vendored)
+        run: cargo build --workspace --release --locked --offline
+
+      - name: cargo test (release, offline, vendored)
+        run: cargo test --workspace --release --locked --offline
+
+      - name: Native suite (release)
+        run: python3 tests/native_suite.py --release
+        shell: bash
+
+      - name: Package host artifact
+        run: python3 scripts/package.py --skip-build
+        shell: bash
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: OTP-${{ matrix.label }}
+          path: |
+            dist/OTP-*-${{ matrix.label }}.*
+            !dist/OTP-*-${{ matrix.label }}
+          if-no-files-found: warn

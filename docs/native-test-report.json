@@ -1,0 +1,248 @@
+{
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "profile": "release",
+  "passed": 48,
+  "total": 48,
+  "tests": [
+    {
+      "test": "hello",
+      "passed": true,
+      "detail": "(0, 'Hello Odin\\n', '')"
+    },
+    {
+      "test": "case_insensitive",
+      "passed": true,
+      "detail": "(0, '42\\n', '')"
+    },
+    {
+      "test": "integers",
+      "passed": true,
+      "detail": "(0, '255 -128 65535 -32768 2147483647\\n', '')"
+    },
+    {
+      "test": "loop_control",
+      "passed": true,
+      "detail": "(0, '28\\n321\\n', '')"
+    },
+    {
+      "test": "case",
+      "passed": true,
+      "detail": "(0, 'aabbc\\n', '')"
+    },
+    {
+      "test": "short_circuit",
+      "passed": true,
+      "detail": "(0, 'ok\\n', '')"
+    },
+    {
+      "test": "nested_recursion",
+      "passed": true,
+      "detail": "(0, '3628805\\n', '')"
+    },
+    {
+      "test": "value_and_var",
+      "passed": true,
+      "detail": "(0, '4 7\\n', '')"
+    },
+    {
+      "test": "var_alias",
+      "passed": true,
+      "detail": "(0, '7\\n', '')"
+    },
+    {
+      "test": "multidimensional",
+      "passed": true,
+      "detail": "(0, '42\\n', '')"
+    },
+    {
+      "test": "records",
+      "passed": true,
+      "detail": "(0, '9 4 abc\\n', '')"
+    },
+    {
+      "test": "strings",
+      "passed": true,
+      "detail": "(0, 'Pasca 5 97 A\\nasc 3 ODIN\\n5 P\\n', '')"
+    },
+    {
+      "test": "real48",
+      "passed": true,
+      "detail": "(0, '5.00 3.0 3 -2\\n', '')"
+    },
+    {
+      "test": "wrap",
+      "passed": true,
+      "detail": "(0, '-32768 0\\n', '')"
+    },
+    {
+      "test": "constant_scope",
+      "passed": true,
+      "detail": "(0, '7\\n', '')"
+    },
+    {
+      "test": "literal_directive",
+      "passed": true,
+      "detail": "(0, '{$X+}\\n', '')"
+    },
+    {
+      "test": "long_expression",
+      "passed": true,
+      "detail": "(0, '60\\n', '')"
+    },
+    {
+      "test": "char_case",
+      "passed": true,
+      "detail": "(0, 'ok\\n', '')"
+    },
+    {
+      "test": "crt_coordinates",
+      "passed": true,
+      "detail": "(0, '\\x1b[4;3H\\x1b[91m3 4\\n', '')"
+    },
+    {
+      "test": "undeclared",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/undeclared.pas:1:1: Variable expected: x\n"
+    },
+    {
+      "test": "mismatch",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/mismatch.pas:1:1: Assignment type mismatch: Int(16, true) <- Str(4)\n"
+    },
+    {
+      "test": "bool_condition",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/bool_condition.pas:1:1: Boolean condition required\n"
+    },
+    {
+      "test": "var_type",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/var_type.pas:1:1: Argument type mismatch for x\n"
+    },
+    {
+      "test": "unsupported_unit",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/unsupported_unit.pas:1:1: Unit 'graph' not implemented. No empty unit substitution.\n"
+    },
+    {
+      "test": "unsupported_pointer",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/unsupported_pointer.pas:1:8: Unsupported character ^\n"
+    },
+    {
+      "test": "circular_const",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/circular_const.pas:1:1: Circular constant\n"
+    },
+    {
+      "test": "bad_const",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/bad_const.pas:1:1: Constant expression cannot reference a variable or routine\n"
+    },
+    {
+      "test": "local_directive",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/local_directive.pas:1:1: Local compiler directives are not implemented; put supported switches before PROGRAM\n"
+    },
+    {
+      "test": "unknown_directive",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/unknown_directive.pas:1:1: Directive '$Z+' is not implemented\n"
+    },
+    {
+      "test": "paren_directive",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/paren_directive.pas:1:1: Directive '$Z+' is not implemented\n"
+    },
+    {
+      "test": "case_overlap",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/case_overlap.pas:1:20: Overlapping case labels\n"
+    },
+    {
+      "test": "builtin_types",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/builtin_types.pas:1:1: Argument type mismatch for copy\n"
+    },
+    {
+      "test": "write_width",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/write_width.pas:1:1: Integer field width required\n"
+    },
+    {
+      "test": "float_bitwise",
+      "passed": true,
+      "detail": "/tmp/otp-native-uo7hmfn_/float_bitwise.pas:1:1: Integer operands expected\n"
+    },
+    {
+      "test": "zero",
+      "passed": true,
+      "detail": "Runtime error 200: Division by zero\n"
+    },
+    {
+      "test": "range",
+      "passed": true,
+      "detail": "Runtime error 201: Range check error\n"
+    },
+    {
+      "test": "overflow",
+      "passed": true,
+      "detail": "Runtime error 215: Arithmetic overflow\n"
+    },
+    {
+      "test": "bounds",
+      "passed": true,
+      "detail": "Runtime error 201: Array index outside bounds\n"
+    },
+    {
+      "test": "PARAMETER",
+      "passed": true,
+      "detail": "('15\\n', '')"
+    },
+    {
+      "test": "FILE_TEKS",
+      "passed": true,
+      "detail": "('Belajar Pascal dengan ODIN\\nFile teks lintas OS\\n', '')"
+    },
+    {
+      "test": "BELAJAR",
+      "passed": true,
+      "detail": "('Nama: Panjang: Lebar: Halo Ayu\\nLuas = 10.00\\n', '')"
+    },
+    {
+      "test": "program_args",
+      "passed": true,
+      "detail": "('1 odin\\n', '')"
+    },
+    {
+      "test": "source_debugger",
+      "passed": true,
+      "detail": "(['LINE 3 1 n=0; \\n', 'LINE 4 1 n=1; \\n', 'LINE 5 1 n=3; \\n'], '3\\n', '')"
+    },
+    {
+      "test": "emit_linux-x64",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "emit_windows-x64",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "emit_macos-x64",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "emit_macos-arm64",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "test": "preserve_good_executable",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

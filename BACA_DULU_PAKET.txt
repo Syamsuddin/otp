@@ -1,0 +1,40 @@
+ODIN TURBO PASCAL v2.0-dev.2 - KEMAS ULANG BERSIH
+Tanggal: 14 Oktober 2026
+
+Paket ini berisi seluruh 9.678 berkas dari dev.2 yang telah diverifikasi,
+termasuk source Rust, vendor, library, aset, contoh, pengujian, panduan,
+dan paket binary Linux. Isi source dev.2 tidak diubah.
+Ditambahkan petunjuk ini dan SHA256SUMS.txt untuk pemeriksaan integritas.
+
+EKSTRAKSI
+Tunggu unduhan sampai selesai. Ekstrak ZIP ke folder baru.
+Di macOS, buka Terminal dari folder unduhan lalu jalankan:
+  unzip -t OTP-v2.0-dev2-CLEAN.zip
+  unzip OTP-v2.0-dev2-CLEAN.zip
+
+Hasil ekstraksi berada dalam satu folder OTP-v2.0-dev2.
+Semua berkas paket berada di dalam folder tersebut. Jangan memindahkan
+hanya folder crates, karena vendor dan konfigurasi Cargo juga diperlukan.
+
+PEMERIKSAAN BERKAS SETELAH EKSTRAKSI
+  cd OTP-v2.0-dev2
+  shasum -a 256 -c SHA256SUMS.txt
+SHA256SUMS.txt memuat seluruh berkas selain dirinya sendiri.
+
+MULAI
+Baca README.md untuk prasyarat build dan cara pemasangan.
+Baca docs/WINDOWS-dev2.md untuk panduan jendela dan shortcut baru.
+
+SOURCE PADA MAC INTEL / APPLE SILICON / WINDOWS
+Source siap dibangun pada host target dengan Rust 1.85.1 dan linker host.
+Tidak ada binary macOS atau Windows yang diklaim sudah diuji di paket ini.
+Binary di folder dist adalah untuk Linux x86_64.
+
+PERUBAHAN DEV.2
+Jendela per dokumen, Tile, Cascade, Zoom, drag/resize, scrollbar,
+daftar jendela, browser Open/Save, konfirmasi overwrite dan close/save.
+F5: Zoom. Ctrl+F5: output. Alt+F3: tutup dokumen.
+
+FORMAT ARSIP
+ZIP standar, kompresi Deflate, tidak terenkripsi, bukan multi-volume,
+tanpa ZIP64, tanpa symlink, dan tanpa metadata __MACOSX/.DS_Store.
