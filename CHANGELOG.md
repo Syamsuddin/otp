@@ -11,6 +11,7 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 - **Rilis**: artefak CI hanya memuat arsip versi yang sedang dibangun (`dist/OTP-<versi>-<platform>.*`). Sebelumnya arsip dev.2 yang di-commit di `dist/` ikut terunggah ke GitHub Release v2.0.0-dev.3.
 - **Rilis**: `scripts/package.py` kini juga menulis `.sha256` untuk DMG macOS.
 - **Rilis**: menjalankan ulang workflow rilis menghapus aset lama di GitHub Release yang tidak lagi dihasilkan build.
+- **Rilis**: tanpa secret `NPM_TOKEN`, langkah publish kini benar-benar dilewati. Sebelumnya `actions/setup-node` mengganti token kosong dengan placeholder `XXXXX-XXXXX-XXXXX-XXXXX`, sehingga `npm publish` tetap jalan dan gagal dengan E404 yang menyesatkan. Publish juga diawali `npm whoami` agar token yang salah gagal dengan pesan jelas.
 
 ### Planned
 - Universal macOS binary (x86_64 + arm64) di satu `.app`.
