@@ -38,6 +38,7 @@ jobs:
 
       - name: Tag must equal the workspace version
         run: |
+          mkdir -p rel-logs
           version=$(python3 scripts/npm_pack.py version)
           [ "$GITHUB_REF_NAME" = "v$version" ] || { echo "::error::Tag $GITHUB_REF_NAME does not match workspace version $version"; exit 1; }
           echo "VERSION=$version" >> "$GITHUB_ENV"
@@ -54,6 +55,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          exec > >(tee -a rel-logs/1-gh-release.log) 2>&1
           files=(artifacts/OTP-*/* artifacts/npm-*/*.tgz)
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
             gh release upload "$GITHUB_REF_NAME" "${files[@]}" --clobber
@@ -66,6 +68,7 @@ jobs:
       - name: Publish to npm
         if: env.NODE_AUTH_TOKEN != ''
         run: |
+          exec > >(tee -a rel-logs/2-npm-publish.log) 2>&1
           publish() {
             name=$(tar -xOzf "$1" package/package.json | python3 -c 'import json,sys; print(json.load(sys.stdin)["name"])')
             if npm view "$name@$VERSION" version >/dev/null 2>&1; then
@@ -81,3 +84,11 @@ jobs:
       - name: npm publish skipped
         if: env.NODE_AUTH_TOKEN == ''
         run: echo "::warning::NPM_TOKEN secret is not set; npm tarballs are attached to the GitHub Release but were not published."
+
+      - name: Report failure tail
+        if: failure()
+        run: |
+          f=$(ls rel-logs/*.log 2>/dev/null | sort | tail -n 1)
+          [ -n "$f" ] || exit 0
+          body=$(tail -n 40 "$f" | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}')
+          echo "::error title=release $(basename "$f")::$body"

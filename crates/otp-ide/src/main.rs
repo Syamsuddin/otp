@@ -638,7 +638,7 @@ impl App {
             docs: vec![Document::new(SAMPLE, None)],
             active: 0,
             output: vec![
-                "ODIN Turbo Pascal 2.0.0-dev.2 | Native compiler written in Rust".into(),
+                concat!("ODIN Turbo Pascal ", env!("CARGO_PKG_VERSION"), " | Native compiler written in Rust").into(),
                 "F3 Open  |  Alt+F9 Compile  |  Ctrl+F9 Run  |  F7 Trace".into(),
             ],
             status: "Ready. Development build; see Help for compatibility.".into(),
@@ -1364,7 +1364,7 @@ impl App {
                 );
                 let lines = if matches!(dialog, Dialog::About) {
                     vec![
-                        "ODIN TURBO PASCAL 2.0.0-dev.2",
+                        concat!("ODIN TURBO PASCAL ", env!("CARGO_PKG_VERSION")),
                         "Independent Rust implementation. GPL-3.0-only.",
                         "",
                         "Reference: Turbo Pascal 7.0 DOS (1992).",
@@ -1553,7 +1553,7 @@ fn main() {
     let mut app = App::new();
     let args: Vec<_> = std::env::args().skip(1).collect();
     if args.first().map(String::as_str) == Some("--version") {
-        println!("ODIN Turbo Pascal IDE 2.0.0-dev.2");
+        println!("ODIN Turbo Pascal IDE {}", env!("CARGO_PKG_VERSION"));
         return;
     }
     if args.first().map(String::as_str) == Some("--screenshot") {

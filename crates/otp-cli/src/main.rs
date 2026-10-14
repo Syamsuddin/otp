@@ -18,11 +18,11 @@ fn main() -> ExitCode {
 fn run() -> Result<u8, String> {
     let args: Vec<String> = std::env::args().skip(1).collect();
     if args.is_empty() || args.iter().any(|s| s == "--help" || s == "-h") {
-        println!("ODIN Turbo Pascal 2.0.0-dev.2 (Rust)\nGPL-3.0-only\n\notpc check FILE.pas\notpc build FILE.pas [-o OUTPUT] [--debug] [--range-check] [--overflow-check]\notpc run FILE.pas [options] [-- PROGRAM_ARGS...]\notpc debug FILE.pas\notpc emit-asm FILE.pas --target linux-x64|windows-x64|macos-x64|macos-arm64 [-o FILE.s]\notpc doctor\n\nDevelopment release. The supported Pascal subset is documented in COMPATIBILITY.md.\nNative linking currently requires a C toolchain (OTP_CC) and bundled otp-rtl.\n");
+        println!("ODIN Turbo Pascal {} (Rust)\nGPL-3.0-only\n\notpc check FILE.pas\notpc build FILE.pas [-o OUTPUT] [--debug] [--range-check] [--overflow-check]\notpc run FILE.pas [options] [-- PROGRAM_ARGS...]\notpc debug FILE.pas\notpc emit-asm FILE.pas --target linux-x64|windows-x64|macos-x64|macos-arm64 [-o FILE.s]\notpc doctor\n\nDevelopment release. The supported Pascal subset is documented in COMPATIBILITY.md.\nNative linking currently requires a C toolchain (OTP_CC) and bundled otp-rtl.\n", env!("CARGO_PKG_VERSION"));
         return Ok(0);
     }
     if args[0] == "--version" {
-        println!("ODIN Turbo Pascal 2.0.0-dev.2");
+        println!("ODIN Turbo Pascal {}", env!("CARGO_PKG_VERSION"));
         return Ok(0);
     }
     if args[0] == "doctor" {

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
 """Package binaries built and tested on the current host. Does not cross-compile."""
-import argparse, hashlib, json, os, platform, plistlib, shutil, subprocess, tarfile, zipfile
+import argparse, hashlib, json, os, platform, plistlib, re, shutil, subprocess, tarfile, zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='2.0.0-dev.2'
+VERSION=re.search(r'^version\s*=\s*"([^"]+)"',(ROOT/'Cargo.toml').read_text(),re.M).group(1)
 parser=argparse.ArgumentParser();parser.add_argument('--skip-build',action='store_true');args=parser.parse_args()
 if not args.skip_build:
  subprocess.run(['cargo','build','--workspace','--release','--locked'],cwd=ROOT,check=True)

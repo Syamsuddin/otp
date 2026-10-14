@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
 """Bundle the current source, vendored dependencies and tested host package."""
-import argparse, hashlib, json, zipfile
+import argparse, hashlib, json, re, zipfile
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '2.0.0-dev.2'
+VERSION = re.search(r'^version\s*=\s*"([^"]+)"',(ROOT/'Cargo.toml').read_text(),re.M).group(1)
 p = argparse.ArgumentParser()
 p.add_argument('output', type=Path)
 args = p.parse_args()

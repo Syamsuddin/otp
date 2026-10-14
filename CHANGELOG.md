@@ -7,11 +7,14 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 
 ## [Unreleased]
 
-### Fixed
-- **CI Windows**: `.gitattributes` (`* -text`) mematikan konversi CRLF saat checkout, yang merusak checksum `vendor/*/.cargo-checksum.json` sehingga `cargo build --offline` gagal di runner Windows.
-- **CI Windows**: workflow memanggil `python` (bukan `python3` yang tidak tersedia di Windows) dan menyiapkan lingkungan MSVC (`ilammy/msvc-dev-cmd`) agar `clang` dapat menautkan program Pascal.
-- **CI Windows**: rustc dikunci ke `link.exe` MSVC lewat path absolut (`CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER`), karena di Git Bash `link.exe` di PATH adalah utilitas coreutils milik Git.
-- **CI macOS Intel**: runner `macos-13` yang sudah pensiun diganti `macos-15-intel`.
+### Planned
+- Universal macOS binary (x86_64 + arm64) di satu `.app`.
+- Developer ID signing + notarization untuk DMG rilis.
+- Fase RENCANA berikutnya: unit compiler + namespace, model ordinal/typed constants, API System dan file I/O lengkap.
+
+## [2.0.0-dev.3] — 2026-10-14
+
+Milestone pengembangan ketiga: keempat platform (Linux x64, Windows x64, macOS Intel, macOS Apple Silicon) dibangun dan lulus native suite 48/48 di CI pada host aslinya, dan OTP dapat dipasang dengan satu baris `npm install -g odin-turbo-pascal`.
 
 ### Added
 - **Distribusi npm**: `npm install -g odin-turbo-pascal` memasang `otpc` dan `otp` di macOS (Intel dan Apple Silicon), Linux x64, dan Windows x64.
@@ -24,11 +27,14 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 ### Changed
 - Workflow CI menampilkan info toolchain dan potongan log langkah yang gagal sebagai anotasi publik.
 - **Status platform**: Windows x64 dan macOS ARM64 kini dibangun dan lulus native suite 48/48 di CI pada host aslinya, sama seperti Linux x64 dan macOS Intel. README, COMPATIBILITY, ARCHITECTURE, dan BUILD-MANIFEST diperbarui.
+- **Versi**: string versi di `otpc` (`--help`, `--version`) dan IDE (status bar, About, `--version`) diambil dari `CARGO_PKG_VERSION`; `scripts/package.py` dan `scripts/bundle_source.py` membaca versi dari `Cargo.toml`, sehingga versi cukup dinaikkan di `Cargo.toml`, `npm/odin-turbo-pascal/package.json`, dan installer.
+- **README**: unduhan arsip per platform menunjuk ke GitHub Releases; ditambah badge npm dan cara pasang satu baris lewat npm.
 
-### Planned
-- Universal macOS binary (x86_64 + arm64) di satu `.app`.
-- Developer ID signing + notarization untuk DMG rilis.
-- Fase RENCANA berikutnya: unit compiler + namespace, model ordinal/typed constants, API System dan file I/O lengkap.
+### Fixed
+- **CI Windows**: `.gitattributes` (`* -text`) mematikan konversi CRLF saat checkout, yang merusak checksum `vendor/*/.cargo-checksum.json` sehingga `cargo build --offline` gagal di runner Windows.
+- **CI Windows**: workflow memanggil `python` (bukan `python3` yang tidak tersedia di Windows) dan menyiapkan lingkungan MSVC (`ilammy/msvc-dev-cmd`) agar `clang` dapat menautkan program Pascal.
+- **CI Windows**: rustc dikunci ke `link.exe` MSVC lewat path absolut (`CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER`), karena di Git Bash `link.exe` di PATH adalah utilitas coreutils milik Git.
+- **CI macOS Intel**: runner `macos-13` yang sudah pensiun diganti `macos-15-intel`.
 
 ## [2.0.0-dev.2] — 2026-10-14
 
@@ -97,6 +103,7 @@ Milestone pengembangan awal. Compiler + runtime + IDE pertama yang bisa dibangun
 - Turbo Vision (Objects, Views, Drivers, Dialogs, Menus, App).
 - `uses Dos` tidak memberi API Dos — hanya nama profil parsial yang dikenali.
 
-[Unreleased]: https://github.com/Syamsuddin/otp/compare/v2.0.0-dev.2...HEAD
+[Unreleased]: https://github.com/Syamsuddin/otp/compare/v2.0.0-dev.3...HEAD
+[2.0.0-dev.3]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.3
 [2.0.0-dev.2]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.2
 [2.0.0-dev.1]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.1
