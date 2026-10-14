@@ -24,8 +24,8 @@ Acuan target: Borland Turbo Pascal 7.0 DOS English 1992. Status dokumen ini meru
 | Turbo Vision | Tidak ada | Objects, Views, Drivers, Dialogs, Menus, App, MsgBox, Validate, collections/streams dan lainnya belum |
 | IDE | Jendela per dokumen, Tile/Cascade/Zoom, move/resize, scrollbar, daftar jendela, file browser dengan konfirmasi overwrite, open/save, undo/redo, selection, clipboard internal, find/replace, menu, compile/run, output/input, konfigurasi pemeriksaan sementara | Grid bukan 80×25; keybinding WordStar, TEMC, layout/event tepat, project/make, help TPH, konfigurasi persisten, OS clipboard belum |
 | Debugger | Statement stepping, next, continue, breakpoint baris, snapshot nilai scalar, stop program | Watches ekspresi, evaluasi/ubah nilai, stack browser, kondisi breakpoint, register/assembly/DOS debugger belum |
-| Native backend | Assembly x86_64 SysV/Win64/Darwin dan ARM64 Darwin; control flow dan procedure native | Linux x64 telah dilink/dijalankan; tiga target lain baru emitter/jalur build, belum eksekusi lintas OS. Belum object writer/linker mandiri, optimisasi atau layout ABI TP |
-| Paket | Source, vendored dependencies, Linux binary + installer per-user; generator Windows ZIP dan macOS app/DMG | Belum MSI/EXE installer, AppImage/DEB/RPM, notarized/signature rilis, updater, universal macOS binary; platform lain belum diverifikasi |
+| Native backend | Assembly x86_64 SysV/Win64/Darwin dan ARM64 Darwin; control flow dan procedure native | Keempat target (Linux x64, Windows x64, macOS x64, macOS ARM64) dilink dan dijalankan di CI native per host, native suite 48/48. Belum object writer/linker mandiri, optimisasi atau layout ABI TP |
+| Paket | Source, vendored dependencies; Linux tar.gz, Windows ZIP, macOS app/DMG/tar.gz dengan installer per-user; paket npm `odin-turbo-pascal` + paket biner per platform, diuji install di CI | Belum MSI/EXE installer, AppImage/DEB/RPM, notarized/signature rilis, updater, universal macOS binary; paket npm belum diterbitkan ke registry |
 
 ## Perilaku internal yang perlu dipahami
 

@@ -111,16 +111,26 @@ Rencana lengkap sampai TP7 compatibility (pointer, Object Pascal, BGI, Turbo Vis
 
 | Target | Format | Status build + uji |
 |---|---|---|
-| 🐧 **Linux x86_64** | `.tar.gz` + `install-linux.sh` per-user | ✅ Dibangun, native suite 48/48 lulus |
-| 🍎 **macOS Intel (x86_64)** | `.tar.gz` + `.app` bundle (ad-hoc codesigned) + `.dmg` (UDZO) | ✅ Dibangun pada macOS 15.7.9, native suite 48/48 lulus |
-| 🍏 **macOS Apple Silicon** | `.tar.gz` + `.app` + `.dmg` | 🟡 Backend ARM64 siap, jalur paket tersedia, belum diuji di hardware |
-| 🪟 **Windows x64** | `.zip` + `install-windows.ps1` per-user | 🟡 Source + installer tersedia, belum dibangun di Windows |
+| 🐧 **Linux x86_64** | `.tar.gz` + `install-linux.sh` per-user · npm `@odin-turbo-pascal/linux-x64` | ✅ CI `ubuntu-24.04`: build, native suite 48/48, npm install |
+| 🍎 **macOS Intel (x86_64)** | `.tar.gz` + `.app` (ad-hoc codesigned) + `.dmg` + `install-macos.sh` · npm `@odin-turbo-pascal/darwin-x64` | ✅ CI `macos-15-intel` + lokal macOS 15.7.9: build, native suite 48/48, npm install |
+| 🍏 **macOS Apple Silicon** | `.tar.gz` + `.app` + `.dmg` + `install-macos.sh` · npm `@odin-turbo-pascal/darwin-arm64` | ✅ CI `macos-14` (ARM64): build, native suite 48/48, npm install |
+| 🪟 **Windows x64** | `.zip` + `install-windows.ps1` per-user · npm `@odin-turbo-pascal/win32-x64` | ✅ CI `windows-2022`: build, native suite 48/48, npm install |
 
-`scripts/package.py` mengemas host aktif saja — tidak cross-compile. CI multi-host disiapkan di `.github/workflows/native.yml`.
+`scripts/package.py` mengemas host aktif saja — tidak cross-compile. CI di [`.github/workflows/native.yml`](.github/workflows/native.yml) membangun dan menguji keempat host pada setiap push; [`release.yml`](.github/workflows/release.yml) menerbitkan GitHub Release dan paket npm saat tag `v*` di-push.
 
 ---
 
 ## 🚀 Mulai Cepat
+
+### 📦 Satu baris lewat npm (semua OS)
+
+```sh
+npm install -g odin-turbo-pascal
+otpc doctor
+otpc run HELLO.PAS
+```
+
+npm otomatis memilih paket biner untuk OS dan CPU Anda (macOS Intel/Apple Silicon, Linux x64, Windows x64), tanpa skrip `postinstall`. Linker C sistem tetap diperlukan: Xcode Command Line Tools, `build-essential`, atau Visual Studio C++ Build Tools + LLVM clang. Detail paket ada di [`npm/`](npm/odin-turbo-pascal/README.md).
 
 ### 🐧 Linux x86_64
 

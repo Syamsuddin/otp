@@ -13,12 +13,20 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 - **CI Windows**: rustc dikunci ke `link.exe` MSVC lewat path absolut (`CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER`), karena di Git Bash `link.exe` di PATH adalah utilitas coreutils milik Git.
 - **CI macOS Intel**: runner `macos-13` yang sudah pensiun diganti `macos-15-intel`.
 
+### Added
+- **Distribusi npm**: `npm install -g odin-turbo-pascal` memasang `otpc` dan `otp` di macOS (Intel dan Apple Silicon), Linux x64, dan Windows x64.
+  - Paket utama [`npm/odin-turbo-pascal`](npm/odin-turbo-pascal/) berisi launcher Node tanpa dependensi yang menjalankan biner platform dan mengatur `OTP_RUNTIME`.
+  - Satu paket biner per platform (`@odin-turbo-pascal/{darwin-arm64,darwin-x64,linux-x64,win32-x64}`) dengan field `os`/`cpu`, dipasang lewat `optionalDependencies`; tanpa skrip `postinstall`.
+  - [`scripts/npm_pack.py`](scripts/npm_pack.py) membuat tarball dengan mode file eksplisit (biner 755) dan menolak packing bila versi npm tidak sama dengan versi Cargo workspace.
+- **CI**: setiap host membuat paket npm-nya, memasangnya secara offline, lalu menjalankan `otpc doctor` dan `otpc run HELLO.PAS` lewat launcher npm.
+- **[`.github/workflows/release.yml`](.github/workflows/release.yml)**: push tag `v<versi>` membangun keempat host, melampirkan arsip dan tarball npm ke GitHub Release, dan menerbitkan ke npm bila secret `NPM_TOKEN` tersedia.
+
 ### Changed
 - Workflow CI menampilkan info toolchain dan potongan log langkah yang gagal sebagai anotasi publik.
+- **Status platform**: Windows x64 dan macOS ARM64 kini dibangun dan lulus native suite 48/48 di CI pada host aslinya, sama seperti Linux x64 dan macOS Intel. README, COMPATIBILITY, ARCHITECTURE, dan BUILD-MANIFEST diperbarui.
 
 ### Planned
 - Universal macOS binary (x86_64 + arm64) di satu `.app`.
-- CI multi-host hijau pada semua target (`linux-x64`, `macos-x64`, `macos-arm64`, `windows-x64`).
 - Developer ID signing + notarization untuk DMG rilis.
 - Fase RENCANA berikutnya: unit compiler + namespace, model ordinal/typed constants, API System dan file I/O lengkap.
 

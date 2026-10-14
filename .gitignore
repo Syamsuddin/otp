@@ -4,6 +4,11 @@
 /target/
 **/*.rs.bk
 
+# Packaging staging dirs and npm tarballs (published via GitHub Releases / npm)
+dist/OTP-*/
+dist/npm/
+/npm-main/
+
 # Native build intermediates emitted next to a Pascal source
 examples/*.otp-build-*/
 # Compiled Pascal executables that live next to their source (keep .PAS, drop binary)

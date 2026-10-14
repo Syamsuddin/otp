@@ -1,0 +1,9 @@
+{
+  "scope": "@odin-turbo-pascal",
+  "platforms": {
+    "darwin-arm64": { "label": "macos-arm64", "title": "macOS Apple Silicon", "os": "darwin", "cpu": "arm64", "exe": "", "runtime": "libotp_rtl.a" },
+    "darwin-x64": { "label": "macos-x64", "title": "macOS Intel", "os": "darwin", "cpu": "x64", "exe": "", "runtime": "libotp_rtl.a" },
+    "linux-x64": { "label": "linux-x64", "title": "Linux x64 (glibc)", "os": "linux", "cpu": "x64", "libc": "glibc", "exe": "", "runtime": "libotp_rtl.a" },
+    "win32-x64": { "label": "windows-x64", "title": "Windows x64", "os": "win32", "cpu": "x64", "exe": ".exe", "runtime": "otp_rtl.lib" }
+  }
+}

@@ -7,6 +7,7 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  workflow_call:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -92,6 +93,19 @@ jobs:
       - name: Package host artifact
         run: python scripts/package.py --skip-build 2>&1 | tee ci-logs/4-package.log
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: npm packages + install smoke test
+        run: |
+          {
+            python scripts/npm_pack.py platform --out dist/npm &&
+            python scripts/npm_pack.py main --out npm-main &&
+            python scripts/npm_pack.py smoke dist/npm/*.tgz npm-main/*.tgz
+          } 2>&1 | tee ci-logs/5-npm.log
+
       # Job logs require an authenticated API call; annotations are public, so
       # surface the tail of the failing step there for remote diagnosis.
       - name: Report failure tail
@@ -110,3 +124,10 @@ jobs:
             dist/OTP-*-${{ matrix.label }}.*
             !dist/OTP-*-${{ matrix.label }}
           if-no-files-found: warn
+
+      - name: Upload npm platform package
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-${{ matrix.label }}
+          path: dist/npm/*.tgz
+          if-no-files-found: error
