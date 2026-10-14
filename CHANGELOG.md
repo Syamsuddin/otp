@@ -10,6 +10,7 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 ### Fixed
 - **CI Windows**: `.gitattributes` (`* -text`) mematikan konversi CRLF saat checkout, yang merusak checksum `vendor/*/.cargo-checksum.json` sehingga `cargo build --offline` gagal di runner Windows.
 - **CI Windows**: workflow memanggil `python` (bukan `python3` yang tidak tersedia di Windows) dan menyiapkan lingkungan MSVC (`ilammy/msvc-dev-cmd`) agar `clang` dapat menautkan program Pascal.
+- **CI Windows**: rustc dikunci ke `link.exe` MSVC lewat path absolut (`CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER`), karena di Git Bash `link.exe` di PATH adalah utilitas coreutils milik Git.
 - **CI macOS Intel**: runner `macos-13` yang sudah pensiun diganti `macos-15-intel`.
 
 ### Changed

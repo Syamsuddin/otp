@@ -52,6 +52,16 @@ jobs:
         with:
           arch: x64
 
+      # Git Bash puts its coreutils `link` (usr/bin/link.exe) ahead of MSVC's
+      # link.exe on PATH, and rustc trusts PATH once VCINSTALLDIR is set.
+      - name: Pin MSVC linker for rustc
+        if: runner.os == 'Windows'
+        run: |
+          dir="${VCToolsInstallDir%\\}"
+          linker="$dir\\bin\\Hostx64\\x64\\link.exe"
+          test -f "$(cygpath -u "$linker")" || { echo "::error::MSVC link.exe not found at $linker"; exit 1; }
+          echo "CARGO_TARGET_X86_64_PC_WINDOWS_MSVC_LINKER=$linker" >> "$GITHUB_ENV"
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
