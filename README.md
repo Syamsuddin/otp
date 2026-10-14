@@ -6,7 +6,7 @@
 
 **Compiler Pascal native yang ditulis ulang dalam Rust — menghidupkan nuansa Borland Turbo Pascal 7.0 untuk era modern, tanpa emulator, tanpa interpreter, tanpa Free Pascal.**
 
-[![Version](https://img.shields.io/badge/version-2.0.0--dev.3-blue.svg?style=flat-square)](VERSION)
+[![Version](https://img.shields.io/badge/version-2.0.0--dev.4-blue.svg?style=flat-square)](VERSION)
 [![npm](https://img.shields.io/npm/v/odin-turbo-pascal.svg?style=flat-square&logo=npm)](https://www.npmjs.com/package/odin-turbo-pascal)
 [![License](https://img.shields.io/badge/license-GPL--3.0--only-brightgreen.svg?style=flat-square)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.85.1-dea584.svg?style=flat-square&logo=rust)](rust-toolchain.toml)
@@ -30,7 +30,7 @@
 
 Kami **tidak** memakai Free Pascal, **tidak** mentranspilasikan Pascal ke Rust, dan **tidak** mengeksekusi bytecode atau AST interpreter. Compiler kami **memancarkan assembly native sejati** (x86_64 SysV / Win64 / Darwin, plus ARM64 Darwin) lalu menautkannya dengan runtime Rust `staticlib` menggunakan toolchain C host sebagai assembler/linker.
 
-> ⚠️ **Milestone saat ini `2.0.0-dev.3`** — subset Pascal yang berfungsi, bisa dibangun end-to-end, lulus 48/48 native test, dan menghasilkan executable mandiri. Ini **belum** clone TP7 100% dan **belum** rilis produksi. Daftar jujur fitur yang didukung vs. yang masih kesenjangan ada di [**matriks kompatibilitas**](docs/COMPATIBILITY.md).
+> ⚠️ **Milestone saat ini `2.0.0-dev.4`** — subset Pascal yang berfungsi, bisa dibangun end-to-end, lulus 48/48 native test, dan menghasilkan executable mandiri. Ini **belum** clone TP7 100% dan **belum** rilis produksi. Daftar jujur fitur yang didukung vs. yang masih kesenjangan ada di [**matriks kompatibilitas**](docs/COMPATIBILITY.md).
 
 ### Lihat dalam Aksi
 
@@ -138,9 +138,9 @@ Arsip per platform juga tersedia di [GitHub Releases](https://github.com/Syamsud
 ### 🐧 Linux x86_64
 
 ```sh
-curl -LO https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.3/OTP-2.0.0-dev.3-linux-x64.tar.gz
-tar -xzf OTP-2.0.0-dev.3-linux-x64.tar.gz
-cd OTP-2.0.0-dev.3-linux-x64
+curl -LO https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.4/OTP-2.0.0-dev.4-linux-x64.tar.gz
+tar -xzf OTP-2.0.0-dev.4-linux-x64.tar.gz
+cd OTP-2.0.0-dev.4-linux-x64
 sh install-linux.sh                       # pasang di ~/.local/bin (atau OTP_PREFIX)
 ~/.local/bin/otpc doctor                  # periksa host + linker
 ~/.local/bin/otp                          # buka IDE desktop
@@ -153,14 +153,14 @@ Prasyarat: X11/XWayland, `cc` + `build-essential`, Python 3.
 ```sh
 # Ganti macos-x64 dengan macos-arm64 untuk Apple Silicon.
 # Opsi 1 — DMG
-curl -LO https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.3/OTP-2.0.0-dev.3-macos-x64.dmg
-open OTP-2.0.0-dev.3-macos-x64.dmg
+curl -LO https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.4/OTP-2.0.0-dev.4-macos-x64.dmg
+open OTP-2.0.0-dev.4-macos-x64.dmg
 # drag "ODIN Turbo Pascal.app" ke /Applications
 
 # Opsi 2 — tarball + installer per-user
-curl -LO https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.3/OTP-2.0.0-dev.3-macos-x64.tar.gz
-tar -xzf OTP-2.0.0-dev.3-macos-x64.tar.gz
-cd OTP-2.0.0-dev.3-macos-x64
+curl -LO https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.4/OTP-2.0.0-dev.4-macos-x64.tar.gz
+tar -xzf OTP-2.0.0-dev.4-macos-x64.tar.gz
+cd OTP-2.0.0-dev.4-macos-x64
 sh install-macos.sh                       # pasang CLI di ~/.local/bin + .app di ~/Applications
 ~/.local/bin/otpc doctor
 ~/.local/bin/otpc run examples/HELLO.PAS
@@ -172,9 +172,9 @@ Prasyarat: Xcode Command Line Tools, Python 3. macOS 11+ (direncanakan).
 ### 🪟 Windows x64
 
 ```powershell
-Invoke-WebRequest https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.3/OTP-2.0.0-dev.3-windows-x64.zip -OutFile OTP-2.0.0-dev.3-windows-x64.zip
-Expand-Archive OTP-2.0.0-dev.3-windows-x64.zip -DestinationPath .
-cd OTP-2.0.0-dev.3-windows-x64
+Invoke-WebRequest https://github.com/Syamsuddin/otp/releases/download/v2.0.0-dev.4/OTP-2.0.0-dev.4-windows-x64.zip -OutFile OTP-2.0.0-dev.4-windows-x64.zip
+Expand-Archive OTP-2.0.0-dev.4-windows-x64.zip -DestinationPath .
+cd OTP-2.0.0-dev.4-windows-x64
 .\install-windows.ps1
 otpc doctor
 otp

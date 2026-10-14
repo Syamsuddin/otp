@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 # Push a tag vX.Y.Z[-pre] that equals the Cargo workspace version to build all
 # four hosts, attach the archives and npm tarballs to a GitHub Release, and
-# publish to npm when the NPM_TOKEN secret is configured.
+# publish to npm when the NPM_OTP_V2 secret (npm token) is configured.
 name: release
 
 on:
@@ -24,7 +24,7 @@ jobs:
     env:
       # Decided here, not from NODE_AUTH_TOKEN: setup-node replaces an empty
       # NODE_AUTH_TOKEN with a placeholder, which would defeat an emptiness check.
-      HAS_NPM_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
+      HAS_NPM_TOKEN: ${{ secrets.NPM_OTP_V2 != '' }}
       NPM_DIST_TAG: ${{ vars.NPM_DIST_TAG || 'latest' }}
     steps:
       - uses: actions/checkout@v4
@@ -75,7 +75,7 @@ jobs:
       - name: Publish to npm
         if: env.HAS_NPM_TOKEN == 'true'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_OTP_V2 }}
         run: |
           exec > >(tee -a rel-logs/2-npm-publish.log) 2>&1
           echo "Publishing as npm user: $(npm whoami)"
@@ -93,7 +93,7 @@ jobs:
 
       - name: npm publish skipped
         if: env.HAS_NPM_TOKEN != 'true'
-        run: echo "::warning::NPM_TOKEN secret is not set; npm tarballs are attached to the GitHub Release but were not published."
+        run: echo "::warning::NPM_OTP_V2 secret is not set; npm tarballs are attached to the GitHub Release but were not published."
 
       - name: Report failure tail
         if: failure()

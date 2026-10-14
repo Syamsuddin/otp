@@ -1,4 +1,4 @@
-# Matriks kompatibilitas v2.0, milestone dev.3
+# Matriks kompatibilitas v2.0, milestone dev.4
 
 Acuan target: Borland Turbo Pascal 7.0 DOS English 1992. Status dokumen ini merujuk implementasi nyata saat ini. Dokumen RENCANA adalah target akhir, bukan daftar fitur yang sudah selesai. Belum ada sertifikasi atau persentase kesamaan 100%.
 

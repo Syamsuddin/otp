@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-only
-param([string]$Destination = "$env:LOCALAPPDATA\Programs\ODIN-Turbo-Pascal\2.0.0-dev.3")
+param([string]$Destination = "$env:LOCALAPPDATA\Programs\ODIN-Turbo-Pascal\2.0.0-dev.4")
 $ErrorActionPreference = 'Stop'
 if (-not (Test-Path "$PSScriptRoot\otp.exe")) { throw 'Run this installer from a built Windows package.' }
 if (-not (Test-Path "$PSScriptRoot\otp_rtl.lib")) { throw 'The MSVC runtime library is missing.' }

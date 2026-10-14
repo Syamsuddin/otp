@@ -1,6 +1,6 @@
 {
   "name": "odin-turbo-pascal",
-  "version": "2.0.0-dev.3",
+  "version": "2.0.0-dev.4",
   "description": "ODIN Turbo Pascal: native Pascal compiler (otpc) and Turbo Pascal 7.0-style IDE (otp) written in Rust",
   "license": "GPL-3.0-only",
   "author": "Syamsuddin",
@@ -35,9 +35,9 @@
     "node": ">=16"
   },
   "optionalDependencies": {
-    "@odin-turbo-pascal/darwin-arm64": "2.0.0-dev.3",
-    "@odin-turbo-pascal/darwin-x64": "2.0.0-dev.3",
-    "@odin-turbo-pascal/linux-x64": "2.0.0-dev.3",
-    "@odin-turbo-pascal/win32-x64": "2.0.0-dev.3"
+    "@odin-turbo-pascal/darwin-arm64": "2.0.0-dev.4",
+    "@odin-turbo-pascal/darwin-x64": "2.0.0-dev.4",
+    "@odin-turbo-pascal/linux-x64": "2.0.0-dev.4",
+    "@odin-turbo-pascal/win32-x64": "2.0.0-dev.4"
   }
 }

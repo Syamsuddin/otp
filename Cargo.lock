@@ -302,21 +302,21 @@ dependencies = [
 
 [[package]]
 name = "otp-cli"
-version = "2.0.0-dev.3"
+version = "2.0.0-dev.4"
 dependencies = [
  "otp-core",
 ]
 
 [[package]]
 name = "otp-core"
-version = "2.0.0-dev.3"
+version = "2.0.0-dev.4"
 dependencies = [
  "otp-types",
 ]
 
 [[package]]
 name = "otp-ide"
-version = "2.0.0-dev.3"
+version = "2.0.0-dev.4"
 dependencies = [
  "font8x8",
  "minifb",
@@ -326,14 +326,14 @@ dependencies = [
 
 [[package]]
 name = "otp-rtl"
-version = "2.0.0-dev.3"
+version = "2.0.0-dev.4"
 dependencies = [
  "otp-types",
 ]
 
 [[package]]
 name = "otp-types"
-version = "2.0.0-dev.3"
+version = "2.0.0-dev.4"
 
 [[package]]
 name = "pin-project-lite"

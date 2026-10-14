@@ -7,20 +7,30 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 
 ## [Unreleased]
 
+### Planned
+- Universal macOS binary (x86_64 + arm64) di satu `.app`.
+- Developer ID signing + notarization untuk DMG rilis.
+- npm Trusted Publishing (OIDC) menggantikan token: token npm saat ini berlaku sampai 2026-11-13, dan npm membatasi token bypass-2FA untuk publish langsung mulai Januari 2027.
+- Fase RENCANA berikutnya: unit compiler + namespace, model ordinal/typed constants, API System dan file I/O lengkap.
+
+## [2.0.0-dev.4] — 2026-10-14
+
+Rilis npm pertama: `npm install -g odin-turbo-pascal` memasang `otpc` dan `otp` untuk macOS (Intel dan Apple Silicon), Linux x64, dan Windows x64. Kode compiler, runtime, dan IDE sama dengan 2.0.0-dev.3; perubahan ada di pipeline rilis.
+
+### Changed
+- **Rilis**: token npm dibaca dari secret Actions `NPM_OTP_V2` (sebelumnya `NPM_TOKEN`, yang tidak pernah ada di repo).
+
 ### Fixed
 - **Rilis**: artefak CI hanya memuat arsip versi yang sedang dibangun (`dist/OTP-<versi>-<platform>.*`). Sebelumnya arsip dev.2 yang di-commit di `dist/` ikut terunggah ke GitHub Release v2.0.0-dev.3.
 - **Rilis**: `scripts/package.py` kini juga menulis `.sha256` untuk DMG macOS.
 - **Rilis**: menjalankan ulang workflow rilis menghapus aset lama di GitHub Release yang tidak lagi dihasilkan build.
-- **Rilis**: tanpa secret `NPM_TOKEN`, langkah publish kini benar-benar dilewati. Sebelumnya `actions/setup-node` mengganti token kosong dengan placeholder `XXXXX-XXXXX-XXXXX-XXXXX`, sehingga `npm publish` tetap jalan dan gagal dengan E404 yang menyesatkan. Publish juga diawali `npm whoami` agar token yang salah gagal dengan pesan jelas.
-
-### Planned
-- Universal macOS binary (x86_64 + arm64) di satu `.app`.
-- Developer ID signing + notarization untuk DMG rilis.
-- Fase RENCANA berikutnya: unit compiler + namespace, model ordinal/typed constants, API System dan file I/O lengkap.
+- **Rilis**: tanpa secret token npm, langkah publish kini benar-benar dilewati. Sebelumnya `actions/setup-node` mengganti token kosong dengan placeholder `XXXXX-XXXXX-XXXXX-XXXXX`, sehingga `npm publish` tetap jalan dan gagal dengan E404 yang menyesatkan. Publish juga diawali `npm whoami` agar token yang salah gagal dengan pesan jelas.
 
 ## [2.0.0-dev.3] — 2026-10-14
 
-Milestone pengembangan ketiga: keempat platform (Linux x64, Windows x64, macOS Intel, macOS Apple Silicon) dibangun dan lulus native suite 48/48 di CI pada host aslinya, dan OTP dapat dipasang dengan satu baris `npm install -g odin-turbo-pascal`.
+Milestone pengembangan ketiga: keempat platform (Linux x64, Windows x64, macOS Intel, macOS Apple Silicon) dibangun dan lulus native suite 48/48 di CI pada host aslinya, dan distribusi npm disiapkan.
+
+> Rilis ini hanya terbit di GitHub Releases. Langkah publish npm gagal karena workflow membaca secret `NPM_TOKEN` yang tidak ada, sehingga paket npm pertama adalah 2.0.0-dev.4.
 
 ### Added
 - **Distribusi npm**: `npm install -g odin-turbo-pascal` memasang `otpc` dan `otp` di macOS (Intel dan Apple Silicon), Linux x64, dan Windows x64.
@@ -109,7 +119,8 @@ Milestone pengembangan awal. Compiler + runtime + IDE pertama yang bisa dibangun
 - Turbo Vision (Objects, Views, Drivers, Dialogs, Menus, App).
 - `uses Dos` tidak memberi API Dos — hanya nama profil parsial yang dikenali.
 
-[Unreleased]: https://github.com/Syamsuddin/otp/compare/v2.0.0-dev.3...HEAD
+[Unreleased]: https://github.com/Syamsuddin/otp/compare/v2.0.0-dev.4...HEAD
+[2.0.0-dev.4]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.4
 [2.0.0-dev.3]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.3
 [2.0.0-dev.2]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.2
 [2.0.0-dev.1]: https://github.com/Syamsuddin/otp/releases/tag/v2.0.0-dev.1

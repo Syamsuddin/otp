@@ -24,7 +24,7 @@ for f in otp otpc libotp_rtl.a; do
  [ -f "$base/$f" ] || { echo "Missing package file: $f" >&2; exit 1; }
 done
 prefix=${OTP_PREFIX:-"$HOME/.local"}
-dest="$prefix/lib/odin-turbo-pascal/2.0.0-dev.3"
+dest="$prefix/lib/odin-turbo-pascal/2.0.0-dev.4"
 # Per-user default. Set OTP_APP_PREFIX=/Applications to install the .app
 # system-wide (requires write permission to that directory).
 app_prefix=${OTP_APP_PREFIX:-"$HOME/Applications"}
