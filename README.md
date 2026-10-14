@@ -44,6 +44,7 @@ end.
 ```
 
 ```console
+$ npm install -g odin-turbo-pascal
 $ otpc run examples/HELLO.PAS
 Built native macos-x64: /path/to/HELLO
 Selamat datang di ODIN Turbo Pascal v2.0
@@ -123,15 +124,76 @@ Rencana lengkap sampai TP7 compatibility (pointer, Object Pascal, BGI, Turbo Vis
 
 ## 🚀 Mulai Cepat
 
-### 📦 Satu baris lewat npm (semua OS)
+### 📦 Instal lewat npm (direkomendasikan, semua OS)
+
+[![npm](https://img.shields.io/npm/v/odin-turbo-pascal.svg?style=flat-square&logo=npm&label=odin-turbo-pascal)](https://www.npmjs.com/package/odin-turbo-pascal)
+
+Cukup satu baris:
 
 ```sh
 npm install -g odin-turbo-pascal
-otpc doctor
-otpc run HELLO.PAS
 ```
 
-npm otomatis memilih paket biner untuk OS dan CPU Anda (macOS Intel/Apple Silicon, Linux x64, Windows x64), tanpa skrip `postinstall`. Linker C sistem tetap diperlukan: Xcode Command Line Tools, `build-essential`, atau Visual Studio C++ Build Tools + LLVM clang. Detail paket ada di [`npm/`](npm/odin-turbo-pascal/README.md).
+Perintah ini memasang dua program: **`otpc`** (compiler CLI) dan **`otp`** (IDE desktop). npm otomatis mengunduh paket biner yang cocok untuk OS dan CPU Anda. Tidak ada skrip `postinstall`, dan tidak ada unduhan tambahan di luar registry npm.
+
+| Sistem | Paket biner yang dipasang otomatis |
+|---|---|
+| macOS Apple Silicon | [`@odin-turbo-pascal/darwin-arm64`](https://www.npmjs.com/package/@odin-turbo-pascal/darwin-arm64) |
+| macOS Intel | [`@odin-turbo-pascal/darwin-x64`](https://www.npmjs.com/package/@odin-turbo-pascal/darwin-x64) |
+| Linux x64 (glibc) | [`@odin-turbo-pascal/linux-x64`](https://www.npmjs.com/package/@odin-turbo-pascal/linux-x64) |
+| Windows x64 | [`@odin-turbo-pascal/win32-x64`](https://www.npmjs.com/package/@odin-turbo-pascal/win32-x64) |
+
+**Prasyarat**
+
+- **Node.js 16+** (sudah termasuk npm).
+- **Linker C sistem**, karena `otpc` menautkan program Pascal menjadi executable native:
+  - **macOS**: Xcode Command Line Tools: `xcode-select --install`
+  - **Linux**: `build-essential` (menyediakan `cc`); IDE desktop butuh X11/XWayland
+  - **Windows**: Visual Studio C++ Build Tools + LLVM `clang` di PATH; jalankan dari *x64 Native Tools Command Prompt*
+
+**Periksa hasil instalasi**
+
+```sh
+otpc --version     # ODIN Turbo Pascal 2.0.0-dev.4
+otpc doctor        # runtime dan linker siap?
+```
+
+**Program pertama**: simpan sebagai `HELLO.PAS`, lalu jalankan:
+
+```pascal
+program Hello;
+begin
+  WriteLn('Halo dari ODIN Turbo Pascal!');
+end.
+```
+
+```sh
+otpc run HELLO.PAS     # kompilasi ke executable native, lalu jalankan
+otp HELLO.PAS          # atau buka di IDE desktop
+```
+
+**Coba tanpa instal global**
+
+```sh
+npx -p odin-turbo-pascal otpc doctor
+npx -p odin-turbo-pascal otpc run HELLO.PAS
+```
+
+**Perbarui dan hapus**
+
+```sh
+npm update -g odin-turbo-pascal       # ke versi terbaru
+npm uninstall -g odin-turbo-pascal    # hapus otpc, otp, dan paket biner platform
+```
+
+**Kalau ada masalah**
+
+- *`platform package @odin-turbo-pascal/... is not installed`*: npm dijalankan dengan `--omit=optional` atau `--no-optional`. Pasang ulang tanpa opsi itu.
+- *`no prebuilt binaries for ...`*: OS/CPU Anda belum didukung (misalnya Linux ARM). Bangun dari source, lihat [Membangun dari Source](#️-membangun-dari-source).
+- *`Linker 'cc' unavailable`* atau *`Native linking failed`*: linker C belum terpasang. Lihat prasyarat di atas, lalu jalankan `otpc doctor` lagi.
+- Paket Linux dibangun di Ubuntu 24.04; distro dengan glibc lebih lama belum diverifikasi.
+
+Rincian paket npm ada di [`npm/odin-turbo-pascal`](npm/odin-turbo-pascal/README.md).
 
 Arsip per platform juga tersedia di [GitHub Releases](https://github.com/Syamsuddin/otp/releases) (macOS: `.dmg` dan `.tar.gz`; Linux: `.tar.gz`; Windows: `.zip`), masing-masing dengan berkas `.sha256`.
 
