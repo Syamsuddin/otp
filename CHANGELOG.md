@@ -7,6 +7,14 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 
 ## [Unreleased]
 
+### Fixed
+- **CI Windows**: `.gitattributes` (`* -text`) mematikan konversi CRLF saat checkout, yang merusak checksum `vendor/*/.cargo-checksum.json` sehingga `cargo build --offline` gagal di runner Windows.
+- **CI Windows**: workflow memanggil `python` (bukan `python3` yang tidak tersedia di Windows) dan menyiapkan lingkungan MSVC (`ilammy/msvc-dev-cmd`) agar `clang` dapat menautkan program Pascal.
+- **CI macOS Intel**: runner `macos-13` yang sudah pensiun diganti `macos-15-intel`.
+
+### Changed
+- Workflow CI menampilkan info toolchain dan potongan log langkah yang gagal sebagai anotasi publik.
+
 ### Planned
 - Universal macOS binary (x86_64 + arm64) di satu `.app`.
 - CI multi-host hijau pada semua target (`linux-x64`, `macos-x64`, `macos-arm64`, `windows-x64`).

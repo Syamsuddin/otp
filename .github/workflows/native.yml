@@ -23,12 +23,15 @@ jobs:
           - os: ubuntu-24.04
             label: linux-x64
             extra-apt: libx11-dev libxkbcommon-dev libwayland-dev
-          - os: macos-13
+          - os: macos-15-intel
             label: macos-x64
           - os: macos-14
             label: macos-arm64
           - os: windows-2022
             label: windows-x64
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
@@ -36,30 +39,58 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: 1.85.1
-          components: rustfmt
 
       - name: Linux X11 headers
         if: matrix.extra-apt != ''
         run: sudo apt-get update && sudo apt-get install -y ${{ matrix.extra-apt }}
+
+      # otpc links Pascal programs with clang on Windows; clang needs the MSVC
+      # library environment that an "x64 Native Tools" shell would provide.
+      - name: MSVC developer environment
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
+      - name: Toolchain info
+        run: |
+          mkdir -p ci-logs
+          {
+            rustc -vV
+            cargo -V
+            python --version
+            clang --version 2>&1 | head -n 1 || echo "clang: not found"
+            cc --version 2>&1 | head -n 1 || echo "cc: not found"
+            git config --get core.autocrlf || echo "core.autocrlf: unset"
+          } 2>&1 | tee ci-logs/0-toolchain.log
+          echo "::notice title=${{ matrix.label }} toolchain::$(tr -d '\r' < ci-logs/0-toolchain.log | awk '{printf "%s%%0A", $0}')"
+
       - name: cargo build (release, offline, vendored)
-        run: cargo build --workspace --release --locked --offline
+        run: cargo build --workspace --release --locked --offline 2>&1 | tee ci-logs/1-build.log
 
       - name: cargo test (release, offline, vendored)
-        run: cargo test --workspace --release --locked --offline
+        run: cargo test --workspace --release --locked --offline 2>&1 | tee ci-logs/2-test.log
 
       - name: Native suite (release)
-        run: python3 tests/native_suite.py --release
-        shell: bash
+        run: python tests/native_suite.py --release 2>&1 | tee ci-logs/3-native-suite.log
 
       - name: Package host artifact
-        run: python3 scripts/package.py --skip-build
-        shell: bash
+        run: python scripts/package.py --skip-build 2>&1 | tee ci-logs/4-package.log
+
+      # Job logs require an authenticated API call; annotations are public, so
+      # surface the tail of the failing step there for remote diagnosis.
+      - name: Report failure tail
+        if: failure()
+        run: |
+          f=$(ls ci-logs/*.log 2>/dev/null | sort | tail -n 1)
+          [ -n "$f" ] || exit 0
+          body=$(tail -n 60 "$f" | tr -d '\r' | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}')
+          echo "::error title=${{ matrix.label }} $(basename "$f")::$body"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

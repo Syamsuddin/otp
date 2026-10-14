@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# No end-of-line conversion anywhere. Windows runners default to
+# core.autocrlf=true, which rewrites vendored sources on checkout and breaks
+# the checksums in vendor/*/.cargo-checksum.json (cargo --offline then refuses
+# to build). It would also invalidate the hashes in SHA256SUMS.txt.
+* -text
