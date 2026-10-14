@@ -7,6 +7,11 @@ dengan suffix `-dev.N` untuk milestone pengembangan di jalur `2.0.0`.
 
 ## [Unreleased]
 
+### Fixed
+- **Rilis**: artefak CI hanya memuat arsip versi yang sedang dibangun (`dist/OTP-<versi>-<platform>.*`). Sebelumnya arsip dev.2 yang di-commit di `dist/` ikut terunggah ke GitHub Release v2.0.0-dev.3.
+- **Rilis**: `scripts/package.py` kini juga menulis `.sha256` untuk DMG macOS.
+- **Rilis**: menjalankan ulang workflow rilis menghapus aset lama di GitHub Release yang tidak lagi dihasilkan build.
+
 ### Planned
 - Universal macOS binary (x86_64 + arm64) di satu `.app`.
 - Developer ID signing + notarization untuk DMG rilis.

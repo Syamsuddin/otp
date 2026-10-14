@@ -44,6 +44,7 @@ if system=='Darwin':
  subprocess.run(['codesign','--force','--deep','--sign','-',str(app)],check=True)
  dmg=dist/(stage.name+'.dmg')
  subprocess.run(['hdiutil','create','-volname','ODIN Turbo Pascal','-srcfolder',str(stage),'-ov','-format','UDZO',str(dmg)],check=True)
+ (dist/(dmg.name+'.sha256')).write_text(f'{hashlib.sha256(dmg.read_bytes()).hexdigest()}  {dmg.name}\n')
 if system=='Windows':
  archive=dist/(stage.name+'.zip')
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:

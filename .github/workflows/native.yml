@@ -68,6 +68,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Release version
+        run: echo "OTP_VERSION=$(python scripts/npm_pack.py version | tr -d '\r')" >> "$GITHUB_ENV"
+
       - name: Toolchain info
         run: |
           mkdir -p ci-logs
@@ -120,10 +123,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: OTP-${{ matrix.label }}
-          path: |
-            dist/OTP-*-${{ matrix.label }}.*
-            !dist/OTP-*-${{ matrix.label }}
-          if-no-files-found: warn
+          # Pin the version: dist/ also holds older committed archives.
+          path: dist/OTP-${{ env.OTP_VERSION }}-${{ matrix.label }}.*
+          if-no-files-found: error
 
       - name: Upload npm platform package
         uses: actions/upload-artifact@v4

@@ -58,6 +58,11 @@ jobs:
           exec > >(tee -a rel-logs/1-gh-release.log) 2>&1
           files=(artifacts/OTP-*/* artifacts/npm-*/*.tgz)
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            # Re-run: drop assets this build no longer produces, then replace the rest.
+            keep=$(printf '%s\n' "${files[@]##*/}")
+            gh release view "$GITHUB_REF_NAME" --json assets -q '.assets[].name' | while read -r asset; do
+              grep -qxF "$asset" <<<"$keep" || gh release delete-asset "$GITHUB_REF_NAME" "$asset" -y
+            done
             gh release upload "$GITHUB_REF_NAME" "${files[@]}" --clobber
           else
             flags=(); case "$VERSION" in *-*) flags+=(--prerelease);; esac
